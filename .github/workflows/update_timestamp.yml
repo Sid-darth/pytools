@@ -14,9 +14,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create or update timestamp file
-        run: echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
-
-      - name: Copy timestamp.txt to workspace
         run: |
-          mkdir $GITHUB_WORKSPACE/gen
-          cp timestamp.txt $GITHUB_WORKSPACE/gen/timestamp.txt
+          echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
+          cat timestamp.txt # Optional: To print the content in the GitHub Actions log
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "Sid-darth"
+          git config --global user.email "realsiddarth@gmail.com"
+
+      - name: Commit timestamp.txt
+        run: |
+          git add timestamp.txt
+          git commit -m "Update timestamp.txt" || echo "No changes to commit"
+          git push
