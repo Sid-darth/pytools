@@ -10,21 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set Git user
+        run: |
+          git config --global user.name "GH Actions"
+          git config --global user.email "ghActions@github.com"
+
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create or update timestamp file
+      - name: Create or update timestamp in CONFIG.env
         run: |
-          echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
-          cat timestamp.txt # Optional: To print the content in the GitHub Actions log
+          current_timestamp=$(date +'%Y%m%d%H%M')
+          config_file="CONFIG.env"
+          
+          # Check if CONFIG.env exists
+          if [ -f "$config_file" ]; then
+            # If CONFIG.env exists, update the 'timestamp' key value
+            sed -i "s/^timestamp=.*/timestamp=${current_timestamp}/" "$config_file"
+          else
+            # If CONFIG.env doesn't exist, create it with the 'timestamp' key
+            echo "timestamp=${current_timestamp}" > "$config_file"
+          fi
 
-      - name: Set up Git
+      - name: Commit CONFIG.env
         run: |
-          git config --global user.name "Sid-darth"
-          git config --global user.email "realsiddarth@gmail.com"
-
-      - name: Commit timestamp.txt
-        run: |
-          git add timestamp.txt
-          git commit -m "Update timestamp.txt" || echo "No changes to commit"
+          git add CONFIG.env
+          git commit -m "Update timestamp in CONFIG.env" || echo "No changes to commit"
           git push
