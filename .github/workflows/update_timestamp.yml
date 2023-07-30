@@ -16,5 +16,7 @@ jobs:
       - name: Create or update timestamp file
         run: echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
 
-      - name: Copy timestamp.txt to repository root
-        run: cp timestamp.txt $GITHUB_WORKSPACE/timestamp.txt
+      - name: Copy timestamp.txt to workspace
+        run: |
+          mkdir $GITHUB_WORKSPACE/gen
+          cp timestamp.txt $GITHUB_WORKSPACE/gen/timestamp.txt
