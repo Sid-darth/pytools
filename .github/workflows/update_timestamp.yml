@@ -9,9 +9,9 @@ jobs:
   update-timestamp:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Create or update timestamp file
-      run: echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
+      - name: Create or update timestamp file
+        run: echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
