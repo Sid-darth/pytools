@@ -14,4 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create or update timestamp file
-        run: echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
+        run: |
+          echo "$(date +'%Y%m%d%H%M')" > timestamp.txt
+          cat timestamp.txt # Add this line to print the content of the file
+
+      - name: Show directory structure
+        run: ls -R
