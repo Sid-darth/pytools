@@ -26,10 +26,10 @@ jobs:
           # Check if CONFIG.env exists
           if [ -f "$config_file" ]; then
             # If CONFIG.env exists, update the 'timestamp' key value
-            sed -i "s/^timestamp=.*/timestamp=${current_timestamp}/" "$config_file"
+            sed -i "s/^timestamp=.*/timestamp=${current_timestamp_pst}/" "$config_file"
           else
             # If CONFIG.env doesn't exist, create it with the 'timestamp' key
-            echo "timestamp=${current_timestamp}" > "$config_file"
+            echo "timestamp=${current_timestamp_pst}" > "$config_file"
           fi
 
       - name: Commit CONFIG.env
