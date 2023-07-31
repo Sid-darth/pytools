@@ -18,18 +18,17 @@ jobs:
 
       - name: Create or update timestamp in CONFIG.env
         run: |
-          current_timestamp_utc=$(date -u +'%Y%m%d%H%M')
-          current_timestamp_pst=$(TZ="America/Los_Angeles" date --date="${current_timestamp_utc}" +'%Y%m%d%H%M')
-          mkdir -p config
+          current_timestamp=$(date +'%Y%m%d%H%M')
+          mkdir config
           config_file="config/CONFIG.env"
           
           # Check if CONFIG.env exists
           if [ -f "$config_file" ]; then
             # If CONFIG.env exists, update the 'timestamp' key value
-            sed -i "s/^timestamp=.*/timestamp=${current_timestamp_pst}/" "$config_file"
+            sed -i "s/^timestamp=.*/timestamp=${current_timestamp}/" "$config_file"
           else
             # If CONFIG.env doesn't exist, create it with the 'timestamp' key
-            echo "timestamp=${current_timestamp_pst}" > "$config_file"
+            echo "timestamp=${current_timestamp}" > "$config_file"
           fi
 
       - name: Commit CONFIG.env
