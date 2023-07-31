@@ -31,7 +31,8 @@ jobs:
           else
             # If CONFIG.env doesn't exist, create it with the 'timestamp' key
             echo "timestamp=${current_timestamp}" > "$config_file"
-
+          fi
+          
       - name: Commit CONFIG.env
         run: |
           git add config
