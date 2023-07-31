@@ -1,9 +1,7 @@
 name: Update-Timestamp
 
 on:
-  push:
-    branches:
-      - main
+  push
 
 jobs:
   update-timestamp:
