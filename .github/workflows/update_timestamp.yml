@@ -18,8 +18,7 @@ jobs:
 
       - name: Create or update timestamp in CONFIG.env
         run: |
-          TZ = 'America/Los_Angeles'  # Set the time zone to PST
-          current_timestamp=$(date +'%Y%m%d%H%M')
+          current_timestamp= $(TZ='America/Los_Angeles' date +'%Y%m%d%H%M')
           mkdir -p config
           config_file="config/CONFIG.env"
           
@@ -30,7 +29,9 @@ jobs:
           else
             # If CONFIG.env doesn't exist, create it with the 'timestamp' key
             echo "timestamp=${current_timestamp}" > "$config_file"
-          fi
+          
+        env:
+          TZ: 'America/Los_Angeles'
 
       - name: Commit CONFIG.env
         run: |
