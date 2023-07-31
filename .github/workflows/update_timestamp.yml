@@ -19,7 +19,7 @@ jobs:
       - name: Create or update timestamp in CONFIG.env
         run: |
           current_timestamp=$(date +'%Y%m%d%H%M')
-          config_file="CONFIG.env"
+          config_file="config/CONFIG.env"
           
           # Check if CONFIG.env exists
           if [ -f "$config_file" ]; then
@@ -32,6 +32,6 @@ jobs:
 
       - name: Commit CONFIG.env
         run: |
-          git add CONFIG.env
+          git add config
           git commit -m "Update timestamp in CONFIG.env" || echo "No changes to commit"
           git push
