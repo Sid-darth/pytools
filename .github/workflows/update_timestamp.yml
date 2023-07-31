@@ -19,6 +19,7 @@ jobs:
       - name: Create or update timestamp in CONFIG.env
         run: |
           current_timestamp=$(date +'%Y%m%d%H%M')
+          mkdir config
           config_file="config/CONFIG.env"
           
           # Check if CONFIG.env exists
